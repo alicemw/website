@@ -56,4 +56,7 @@
 </script>
 
 <style>
+	.current_location {
+		margin-top: 0.2rem;
+	}
 </style>

@@ -4,7 +4,7 @@
 			<section class="passage_one">
 		        <div class="classification">
 		            <div class="classification_total">
-		                <div class="classification_left"><a href="#">疾病分类</a></div>
+		                <div class="classification_left"><router-link to="/list">疾病分类</router-link></div>
 		                <div class="classification_right"><a href="#">更多 ＞</a></div>
 		                <div class="clear"></div>
 		            </div>
@@ -15,10 +15,11 @@
 		                <div class="Seasonal_picture"><img src="../assets/images//wether.png"/><p>季节高发</p></div>
 		                <ul>
 		                   <li>
-		                   		<a href="#">青春痘</a>
-		                   		<a href="#">荨麻疹</a>
-		                   		<a href="#">脱发</a>
-		                   		<a href="#">牛皮癣</a>
+		                   		<router-link to="/list/qingchundou">青春痘</router-link>
+		                   		<router-link to="/list/xunmazhen">荨麻疹</router-link>
+		                   		<router-link to="/list/tuofa">脱发</router-link>
+		                   		<router-link to="/list/niupixuan">牛皮癣</router-link>
+		                   		
 		                   </li>
 		                   <li>
 		                   		<a href="#">灰指甲</a>
@@ -191,12 +192,5 @@
 </script>
 
 <style>
-	.container {
-		background: #F3F3F3;
-	}
-	.innercontainer {
-		background: white;
-		margin: 0.2rem auto; 
-		padding-bottom: 0.02rem;
-	}
+	
 </style>

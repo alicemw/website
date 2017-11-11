@@ -71,13 +71,15 @@ nav .nav:nth-child(4) {
 .position {
 	width: 6rem;
 	padding: .2rem 0;
-	font-size: .22rem;
+	font-size: .24rem;
 	color: #656565;
 	margin: 0 auto;
 	border-bottom: 1px solid #ccc;
 }
-.position>p,.position>p>span {
+.position>p,.position>p>a {
 	font-size: 0.28rem;
+	color: #656565;
+	font-weight: bold;
 }
 .qcd span {
 	color: #55b0ff;
@@ -483,7 +485,7 @@ nav .nav:nth-child(4) {
 	padding-bottom: .2rem;
 }
 .sec6 h1 img {
-	width: 4.13rem;
+	width: 100%;
 }
 .sec6 .lunbo {
 	background: #f3f3f3;
@@ -598,7 +600,7 @@ nav .nav:nth-child(4) {
 	margin-bottom: .2rem;
 }
 .sec8 h1 img {
-	width: 4.13rem;
+	width: 100%;
 }
 .evaluate>ul{ width:6rem; margin:0 auto;}
 .evaluate_treat>li{ float:left;}
@@ -1480,6 +1482,7 @@ td{
 	text-align: left;
 	color: #55B0FF;
 	font-size: 0.28rem;
+	padding-top: 0.2rem;
 }
 #list_article .hotpoint a {
 	color: #FE513E;
@@ -1651,6 +1654,9 @@ td{
 /*轮播图*/
 .flex-direction-nav {
 	display: none;
+}
+#list_article .list-anli .flex-control-nav {
+	display: block;
 }
 .flex-control-nav {
 	margin-left: 2.5rem;

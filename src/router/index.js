@@ -5,6 +5,7 @@ import about from '@/components/about'
 import contact from '@/components/contact'
 import listDoc from '@/components/listDoc'
 import listEqp from '@/components/listEqp'
+import list from '@/components/list'
 
 Vue.use(Router)
 
@@ -12,8 +13,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: HelloWorld
+      name: 'about',
+      component: about
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: list,
+    	children:[{
+    		path:'/list/:item',
+    		component:list
+    	}]
     },
     {
     	path:'/about',

@@ -12,7 +12,14 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .nav ul li p{margin-bottom:0.2rem; text-align:center;}
 .nav ul li a{ color:#202020; font-size:0.2rem; }
 /*nav结束*/
-
+.container {
+		background: #F3F3F3;
+	}
+.innercontainer {
+	background: white;
+	margin: 0.2rem auto; 
+	padding-bottom: 0.02rem;
+}
 /*中间灰色部分*/
 .nav_1{ background:#f3f3f3; height:0.2rem;}
 
@@ -35,7 +42,7 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .disease_picture p{ font-size:0.22rem; text-align:center; color:#FFF;}
 .disease_total ul{ height: 1.66rem;}
 .disease_total ul li{height: 1.66rem; width:1.387rem; margin-left:0.1rem;  float:left; margin-bottom:0.06rem;}
-.disease_total ul li a{ text-align:center; color:#262626; font-size:0.18rem; display:block;line-height:0.48rem;border:1px solid #dddddd;}
+.disease_total ul li a{ text-align:center; color:#262626; font-size:0.24rem; display:block;line-height:0.48rem;border:1px solid #dddddd;}
 
 .beauty_total{width:6rem; margin:0 auto; margin-top:0.2rem;}
 .beauty_picture{ width:1.5rem; background:#37c9cd; float:left; height:1.06rem;}
@@ -43,7 +50,7 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .beauty_picture p{ font-size:0.22rem; text-align:center; color:#FFF;}
 .beauty_total ul{ width:4.5rem; float:right;height: 1.06rem;}
 .beauty_total ul li{height: 1.06rem; width:1.387rem; margin-left:0.1rem; float:left; margin-bottom:0.06rem;display: flex;justify-content: space-between;flex-direction: column;}
-.beauty_total ul li a{ text-align:center; color:#262626; font-size:0.18rem; display:block; line-height:0.48rem;border:1px solid #dddddd; }
+.beauty_total ul li a{ text-align:center; color:#262626; font-size:0.24rem; display:block; line-height:0.48rem;border:1px solid #dddddd; }
 
 .nav_foot{ width:6rem; margin:0.18rem auto;}
 .nav_foot img{width:100%; display:block;}
@@ -53,8 +60,8 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .nav_2{ height:0.16rem;background:#f3f3f3;}
 
 /*passage_two开始*/
-.title1{ width:6rem; margin:0.2rem auto; border-bottom:1px solid #dddddd;}
-.title1 img{ display:block; width:3.6rem; margin:0.18rem auto;}
+.title1{ width:6.4rem; margin:0.2rem auto; border-bottom:1px solid #dddddd;}
+.title1 img{ display:block; width:100%; margin:0.18rem auto;}
 
 .title1_list{ width:6rem; margin:0 auto;}
 .title1_list li{ background:#909090; height:0.55rem; line-height:0.55rem; float:left; margin-bottom:0.04rem;}
