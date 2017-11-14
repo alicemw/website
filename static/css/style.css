@@ -1670,6 +1670,7 @@ td{
 	height: 0.15rem;
 	border-radius: 50%;
 	background: #ddd;
+	color: transparent;
 	display: inline-block;
 	
 }

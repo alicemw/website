@@ -15,24 +15,12 @@
 		                <div class="Seasonal_picture"><img src="../assets/images//wether.png"/><p>季节高发</p></div>
 		                <ul>
 		                   <li>
-		                   		<router-link to="/list/qingchundou">青春痘</router-link>
-		                   		<router-link to="/list/xunmazhen">荨麻疹</router-link>
-		                   		<router-link to="/list/tuofa">脱发</router-link>
-		                   		<router-link to="/list/niupixuan">牛皮癣</router-link>
-		                   		
+		                   		<template v-for="(item,index) in data" v-if="index <12">
+		                   			<router-link :to="item.typedir" >{{item.typename}}</router-link>
+		                   			
+		                   		</template>
 		                   </li>
-		                   <li>
-		                   		<a href="#">灰指甲</a>
-		                   		<a href="#">湿疹</a>
-		                   		<a href="#">白癜风</a>
-		                   		<a href="#">腋臭</a>
-		                   </li>
-		                   <li>
-		                   		<a href="#">皮炎</a>
-		                   		<a href="#">带状疱疹</a>
-		                   		<a href="#">扁平疣</a>
-		                   		<a href="#">鱼鳞病</a>
-		                   </li>
+		                   
 		                   <div class="clear"></div>
 		                </ul>
 		               <div class="clear"></div>
@@ -181,12 +169,26 @@
 </template>
 
 <script>
-	export default {
-  name: 'about',
+export default {
+
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      data:''
+      
     }
+  },
+  created(){
+  	window.onload = () => { this.data = diseaseList } 
+  },
+  mounted (){
+  	this.data =diseaseList;
+  	
+ //banner lunbo
+ 	$(".banner_2 .flexslider").flexslider({
+    	animation : "slide"
+    	
+    });
   }
 }
 </script>

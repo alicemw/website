@@ -1,28 +1,36 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import vueResource from 'vue-resource'
 import HelloWorld from '@/components/HelloWorld'
 import about from '@/components/about'
 import contact from '@/components/contact'
 import listDoc from '@/components/listDoc'
 import listEqp from '@/components/listEqp'
 import list from '@/components/list'
+import article from '@/components/article'
 
 Vue.use(Router)
+Vue.use(vueResource)
 
 export default new Router({
+	history: false,
+  hashbang: true,
   routes: [
     {
       path: '/',
-      name: 'about',
       component: about
     },
     {
-      path: '/list',
+      path: '/pifubing',
       name: 'list',
       component: list,
     	children:[{
-    		path:'/list/:item',
-    		component:list
+    		path:'/pifubing/:item',
+    		component:list,
+    		children:[{
+    			path:'/pifubing/:item/:num',
+    			component:article
+    		}]
     	}]
     },
     {
@@ -47,7 +55,8 @@ export default new Router({
     {
     	//路由重定向规则
     	path:'*',
-    	redirect:'/'
+    	redirect:'/',
+    	component:about
     }
   ]
 })

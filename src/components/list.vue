@@ -3,15 +3,15 @@
 		<div class="innercontainer">
 			<div class="qcd">
     	<div class="position">
-    		<p><router-link to="/">首页</router-link>> <router-link to="/list">{{msg}}</router-link>></p>
+    		<p><router-link to="/">首页</router-link>> <router-link to="/list">{{name}}</router-link>></p>
 		    	</div>
 		    	<section class="sec4">
 		    		
-		    		<div class="doctor">
-		    			<img src="../assets/images/list_lst (1).jpg" alt="" style="width: 1.8rem;" />
+		    		<div class="doctor" v-for="con in diseases">
+		    			<img :src="con.litpic" alt="" style="width: 1.8rem;" />
 		    			<div class="docinfo">
-		    				<p><b>青春痘如何治疗？</b></p> 
-		    				<p>青春痘该如何治疗？青春痘的治疗不仅要治标，更要治本。因而在选择治 ... <a href="#" style="color: #FE513E;">【详情】</a></p>
+		    				<p><b>{{con.title}}</b></p> 
+		    				<p>{{con.description}} ... <a href="#" style="color: #FE513E;">【详情】</a></p>
 		    				<a href="#">在线咨询</a>
 		    			</div>
 		    			<div class="clear"></div>
@@ -238,26 +238,73 @@
 </template>
 
 <script>
-	
+
+
 export default {
   name: 'list',
   data () {
     return {
-      msg: '列表页'
+      msg: '列表页',
+      name:'列表页',
+      nameid:'',
+      diseases:''
     }
   },
-  mounted(){
+  mounted (){
   	
-  	$.ajax({
-		type:"POST",
-		data:{name:'小明',age:15},
-		url:"../../static/json/test.php",
-		async:true,
-		success:function(msg){
-			console.log(msg);
-		}
-	});
-  }
+  	let path = this.$route.path;
+  	
+  	let _this =this;
+  	 	$.each(diseaseList, function(index,value) {
+  		if(value.typedir == path){
+  			_this.$data.name =value.typename;
+  			_this.$data.nameid = value.id;
+  		}
+  	 });
+  	 var nid = this.nameid;
+  	 if (!storage.getItem(this.name)||storage.getItem(this.name)==0) {
+	  	 	$.ajax({
+			type : "POST",
+		    url : "http://m.0832pifu.com/test/test1.php",
+		    data:{'typeid':nid},
+		    dataType : "jsonp",
+		    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+		    jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+		    success : function(res){
+				/*$.each(res, function(idx,obj) {
+					obj.typedir =obj.typedir.substring(9);
+				});*/
+				$.each(res, function(idx,obj) {
+					//拼接图片地址
+					obj.litpic ='http://m.0832pifu.com'+obj.litpic;
+					//字符串字数限制
+					obj.description= obj.description.substr(0,20);
+				});
+				_this.$data.diseases =res;
+				
+				var b = JSON.stringify(_this.$data.diseases);
+			
+				storage.setItem(_this.$data.name,b);
+		    },
+		    error:function(){
+		        alert('fail');
+		    }
+		});
+  	 }else {
+  	 	this.diseases =JSON.parse(storage.getItem(this.name));//必须格式转换
+  	 }
+  	 
+ //banner lunbo
+ 	$(".list-anli .flexslider").flexslider({
+    	animation : "slide"
+    	
+    });
+
+  },
+
+  methods:{
+ 	
+ }
 }	
 </script>
 
