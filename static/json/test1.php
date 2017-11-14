@@ -8,7 +8,7 @@ header('Access-Control-Allow-Headers:x-requested-with,content-type');
 require_once ("../include/common.inc.php");
 $data =array();
 $id =$_GET['typeid'];
-$sql = "Select title,litpic,description From dede_archives where typeid = '" . $id . "'";
+$sql = "Select id,title,litpic,description From dede_archives where typeid = '" . $id . "'";
 
 $dsql->SetQuery($sql);//将SQL查询语句格式化
 $dsql->Execute();//执行SQL操作

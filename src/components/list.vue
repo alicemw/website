@@ -10,8 +10,8 @@
 		    		<div class="doctor" v-for="con in diseases">
 		    			<img :src="con.litpic" alt="" style="width: 1.8rem;" />
 		    			<div class="docinfo">
-		    				<p><b>{{con.title}}</b></p> 
-		    				<p>{{con.description}} ... <a href="#" style="color: #FE513E;">【详情】</a></p>
+		    				<p><router-link :to="con.id"><b>{{con.title}}</b></router-link></p> 
+		    				<p>{{con.description}} ... <router-link :to="con.id" :style="{color:'red'}">【详情】</router-link></p>
 		    				<a href="#">在线咨询</a>
 		    			</div>
 		    			<div class="clear"></div>
@@ -279,6 +279,7 @@ export default {
 					obj.litpic ='http://m.0832pifu.com'+obj.litpic;
 					//字符串字数限制
 					obj.description= obj.description.substr(0,20);
+					obj.id ='/foo/'+obj.id;
 				});
 				_this.$data.diseases =res;
 				
@@ -291,13 +292,13 @@ export default {
 		    }
 		});
   	 }else {
+  	 
   	 	this.diseases =JSON.parse(storage.getItem(this.name));//必须格式转换
   	 }
   	 
  //banner lunbo
  	$(".list-anli .flexslider").flexslider({
     	animation : "slide"
-    	
     });
 
   },

@@ -26,12 +26,13 @@ export default new Router({
       component: list,
     	children:[{
     		path:'/pifubing/:item',
-    		component:list,
-    		children:[{
-    			path:'/pifubing/:item/:num',
-    			component:article
-    		}]
+    		component:list
     	}]
+    },{
+    	path:'/foo/:num',
+    	name:'article',
+    	component:article
+    	
     },
     {
     	path:'/about',

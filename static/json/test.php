@@ -7,6 +7,7 @@ header('content-type:application:json;charset=utf8');
 header('Access-Control-Allow-Headers:x-requested-with,content-type'); 
 require_once ("../include/common.inc.php");
 $data =array();
+
 $sql = "Select id,typename,typedir From dede_arctype where topid = 47";
 $dsql->SetQuery($sql);//将SQL查询语句格式化
 $dsql->Execute();//执行SQL操作
