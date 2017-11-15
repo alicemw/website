@@ -35,7 +35,7 @@
 		    	<section class="article-about">
 		    		<h1>相关文章 <a href="#">查看更多</a></h1>
 		    		<ul>
-		    			<li v-for="(item,index) in likart" v-if="index<4" >
+		    			<li v-for="(item,index) in likart" v-if="index<4">
 		    				<router-link :to="item.id">{{item.title}}</router-link>
 		    			</li>
 		    			
@@ -302,21 +302,34 @@
 				    	let str = res[0].body;
 				    	//图片路径修改。str.replace应用
 				    	res[0].body = str.replace(/\/uploads/g,"http://m.0832pifu.com/uploads");
-				    	
+				    	//赋值maincon为文章主题内容
 						_this.$data.maincon =res[0];
+						//获取文章上级路径
 						$.each(diseaseList, function(idx,obj) {
 							if(res[0].typename==obj.typename){
 								_this.topdir =obj.typedir;
 							}
 						});	
+						//获取上级栏目名称
 						let a =_this.maincon.typename;
+						//从缓存中取出相关数据
 						let b =JSON.parse(storage.getItem(a));
+						let c;
 							_this.$data.likart =b;
 						$.each(b, function(idx,obj) {
 							if(_this.$route.path == obj.id){
-								_this.$data.title = obj.title
+								_this.$data.title = obj.title;
+								c =obj;
 							}
 						});
+						for(let i=0; i<b.length; i++) {
+					    if(b[i] == c) {
+						      b.splice(i, 1);
+						      break;
+						    }
+						  }
+						
+						_this.$data.likart =b;
 				    },
 				    error:function(){
 				        alert('fail');
@@ -325,7 +338,7 @@
 		     
 		   }
 		 },
-		
+		 
 		mounted(){
 			//banner lunbo
 		 	$(".list-anli .flexslider").flexslider({
@@ -358,12 +371,25 @@
 					});	
 					let a =_this.maincon.typename;
 					let b =JSON.parse(storage.getItem(a));
-						_this.$data.likart =b;
+					let c;
+						
 					$.each(b, function(idx,obj) {
-						if(_this.$route.path == obj.id){
-							_this.$data.title = obj.title
+						
+						if(obj.id ==_this.$route.path ){
+							_this.$data.title = obj.title;
+							c =obj;
 						}
 					});
+					 for(let i=0; i<b.length; i++) {
+					    if(b[i] == c) {
+					      b.splice(i, 1);
+					      break;
+					    }
+					  }
+					 
+					_this.$data.likart =b;
+					
+					
 			    },
 			    error:function(){
 			        alert('fail');

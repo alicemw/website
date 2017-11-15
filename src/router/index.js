@@ -14,6 +14,7 @@ Vue.use(vueResource)
 
 export default new Router({
 	history: false,
+	//用mode history去除路由中的 #/
 	mode:'history',
   hashbang: true,
   routes: [
@@ -34,13 +35,7 @@ export default new Router({
     },{//文章页路由
     	path:'/foo/:num',
     	name:'article',
-    	component:article,
-    	children:[{
-    		path:'/foo/:num',
-	    	name:'article',
-	    	component:article
-    	}]
-    	
+    	component:article
     },
     {
     	path:'/about',
