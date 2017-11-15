@@ -7,8 +7,14 @@ header('content-type:application:json;charset=utf8');
 header('Access-Control-Allow-Headers:x-requested-with,content-type'); 
 require_once ("../include/common.inc.php");
 $data =array();
-$id =$_GET['typeid'];
-$sql = "Select id,title,litpic,description From dede_archives where typeid = '" . $id . "'";
+if(isset($_GET['typeid'])){
+	$id =$_GET['typeid'];
+	$sql = "Select id,title,litpic,description From dede_archives where typeid = '" . $id . "'";
+}elseif(isset($_GET['artid'])){
+	$id =$_GET['artid'];
+	$sql = "Select dede_addonedisease.typeid,dede_addonedisease.body,dede_arctype.id,dede_arctype.typename From dede_addonedisease,dede_arctype where dede_addonedisease.aid = '" . $id . "' and dede_arctype.id = dede_addonedisease.typeid";
+	
+}
 
 $dsql->SetQuery($sql);//将SQL查询语句格式化
 $dsql->Execute();//执行SQL操作

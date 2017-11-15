@@ -2,10 +2,13 @@
 	<div class="container">
 		<div class="innercontainer">
 			<div class="position">
-	    		<p>首页 > <span>青春痘</span></p>
+	    		<p><router-link to="/">首页</router-link> > <span><router-link :to="topdir" v-model="maincon">{{maincon.typename}}</router-link></span></p>
 	    	</div>
 	    	<div class="mainarticle">
-	    			<p>你好啊 啊啊 </p>
+	    			<h1>{{title}}</h1>
+	    			<div v-html="maincon.body">
+	    				
+	    			</div>
 	    	</div>
 	    	<div class="mainbody-note">
 	    		<p><b>温馨提示：</b>治疗青春痘，切勿贪便宜，请慎重选择。若有其他疑问，欢迎点击在线咨询，或者拨打免费咨询电话：<strong style="color: #FE513E;">0832-5197777</strong>，获得更贴心的回答!</p>
@@ -32,10 +35,10 @@
 		    	<section class="article-about">
 		    		<h1>相关文章 <a href="#">查看更多</a></h1>
 		    		<ul>
-		    			<li>青春痘的治疗方法有哪些？</li>
-		    			<li>青春痘的治疗方法有哪些？</li>
-		    			<li>青春痘的治疗方法有哪些？</li>
-		    			<li>青春痘的治疗方法有哪些？</li>
+		    			<li v-for="(item,index) in likart" v-if="index<4" >
+		    				<router-link :to="item.id">{{item.title}}</router-link>
+		    			</li>
+		    			
 		    		</ul>
 		    		<a href="#" class="clickmore">点击在线咨询</a>
 		    	</section>
@@ -266,14 +269,107 @@
 			return {
 				msg:'hello world！',
 				maincon:'',
-				artid:''
+				artid:'',
+				topdir:'',
+				title:'',
+				likart:''
 			}
+		}, 
+		created () {
+		  
 		},
+		 watch: {
+		   '$route' (to, from) {
+		     //banner lunbo
+			 	$(".list-anli .flexslider").flexslider({
+			    	animation : "slide"
+			    });
+			    
+			   this.artid = (this.$route.path).substring(5);
+			   
+			   let _this =this;
+			   let nid =this.artid;
+			   
+			    //数据请求
+			    $.ajax({
+					type : "POST",
+				    url : "http://m.0832pifu.com/test/test1.php",
+				    data:{'artid':nid},
+				    dataType : "jsonp",
+				    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+				    jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+				    success : function(res){
+				    	let str = res[0].body;
+				    	//图片路径修改。str.replace应用
+				    	res[0].body = str.replace(/\/uploads/g,"http://m.0832pifu.com/uploads");
+				    	
+						_this.$data.maincon =res[0];
+						$.each(diseaseList, function(idx,obj) {
+							if(res[0].typename==obj.typename){
+								_this.topdir =obj.typedir;
+							}
+						});	
+						let a =_this.maincon.typename;
+						let b =JSON.parse(storage.getItem(a));
+							_this.$data.likart =b;
+						$.each(b, function(idx,obj) {
+							if(_this.$route.path == obj.id){
+								_this.$data.title = obj.title
+							}
+						});
+				    },
+				    error:function(){
+				        alert('fail');
+				    }
+				});
+		     
+		   }
+		 },
+		
 		mounted(){
 			//banner lunbo
 		 	$(".list-anli .flexslider").flexslider({
 		    	animation : "slide"
 		    });
+		    
+		   this.artid = (this.$route.path).substring(5);
+		   
+		   let _this =this;
+		   let nid =this.artid;
+		   
+		    //数据请求
+		    $.ajax({
+				type : "POST",
+			    url : "http://m.0832pifu.com/test/test1.php",
+			    data:{'artid':nid},
+			    dataType : "jsonp",
+			    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+			    jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+			    success : function(res){
+			    	let str = res[0].body;
+			    	//图片路径修改。str.replace应用
+			    	res[0].body = str.replace(/\/uploads/g,"http://m.0832pifu.com/uploads");
+			    	
+					_this.$data.maincon =res[0];
+					$.each(diseaseList, function(idx,obj) {
+						if(res[0].typename==obj.typename){
+							_this.topdir =obj.typedir;
+						}
+					});	
+					let a =_this.maincon.typename;
+					let b =JSON.parse(storage.getItem(a));
+						_this.$data.likart =b;
+					$.each(b, function(idx,obj) {
+						if(_this.$route.path == obj.id){
+							_this.$data.title = obj.title
+						}
+					});
+			    },
+			    error:function(){
+			        alert('fail');
+			    }
+			});
+			
 		}
 	}
 </script>

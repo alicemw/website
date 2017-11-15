@@ -14,24 +14,32 @@ Vue.use(vueResource)
 
 export default new Router({
 	history: false,
+	mode:'history',
   hashbang: true,
   routes: [
     {
+    	//首页路由
       path: '/',
       component: about
     },
-    {
+    {//列表页路由
       path: '/pifubing',
       name: 'list',
       component: list,
+      //列表各种病种分类子路由
     	children:[{
     		path:'/pifubing/:item',
     		component:list
     	}]
-    },{
+    },{//文章页路由
     	path:'/foo/:num',
     	name:'article',
-    	component:article
+    	component:article,
+    	children:[{
+    		path:'/foo/:num',
+	    	name:'article',
+	    	component:article
+    	}]
     	
     },
     {

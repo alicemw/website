@@ -42,7 +42,7 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .disease_picture p{ font-size:0.22rem; text-align:center; color:#FFF;}
 .disease_total ul{ height: 1.66rem;}
 .disease_total ul li{height: 1.66rem; width:1.387rem; margin-left:0.1rem;  float:left; margin-bottom:0.06rem;}
-.disease_total ul li a{ text-align:center; color:#262626; font-size:0.24rem; display:block;line-height:0.48rem;border:1px solid #dddddd;}
+.disease_total ul li a{height: 28%; text-align:center; color:#262626; font-size:0.24rem; display:block;line-height:0.48rem;border:1px solid #dddddd;}
 
 .beauty_total{width:6rem; margin:0 auto; margin-top:0.2rem;}
 .beauty_picture{ width:1.5rem; background:#37c9cd; float:left; height:1.06rem;}
@@ -50,7 +50,7 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .beauty_picture p{ font-size:0.22rem; text-align:center; color:#FFF;}
 .beauty_total ul{ width:4.5rem; float:right;height: 1.06rem;}
 .beauty_total ul li{height: 1.06rem; width:1.387rem; margin-left:0.1rem; float:left; margin-bottom:0.06rem;display: flex;justify-content: space-between;flex-direction: column;}
-.beauty_total ul li a{ text-align:center; color:#262626; font-size:0.24rem; display:block; line-height:0.48rem;border:1px solid #dddddd; }
+.beauty_total ul li a{height: 43%; text-align:center; color:#262626; font-size:0.24rem; display:block; line-height:0.48rem;border:1px solid #dddddd; }
 
 .nav_foot{ width:6rem; margin:0.18rem auto;}
 .nav_foot img{width:100%; display:block;}

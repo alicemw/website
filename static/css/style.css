@@ -678,6 +678,10 @@ footer p{  text-align:center; color:#ffffff; font-size: 0.22rem; margin:0.075rem
 	max-width: 640px;
 	margin:.2rem auto;
 }
+.mainarticle h1 {
+	text-align: center;
+	margin: 10px 0;
+}
 .mainbody-note {
 	width:5.6rem ;
 	padding:0.3rem 0.2rem;
@@ -755,6 +759,9 @@ justify-content: space-between;
 	border-bottom: 1px dashed #ccc;
 	background: url(../../src/assets/images/triangle-r.png) left center no-repeat;
 	
+}
+.article-about ul li a {
+	color: #656565;
 }
 .article-about ul li:last-child {
 	border-bottom: 1px solid #ccc;
