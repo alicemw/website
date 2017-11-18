@@ -27,6 +27,7 @@
 					    layout="prev, pager, next,total"
 					    :total="totallist">
 					  </el-pagination>
+					 
 		    		</div>
 		    	</section>
 		    </div>
@@ -278,7 +279,7 @@ export default {
   	 _this.$data.pagestart = (new Date()).getTime();
   	 if (!storage.getItem(this.name)) {
   	 	
-  	 
+  		 $(".sec4").hide();
   	 	let loading = Vue.prototype.$loading({text:"玩命加载中...",background:"#80bd01",spinner:'el-icon-loading'});
   	 	
 	  	 	$.ajax({
@@ -303,7 +304,7 @@ export default {
 				storage.setItem(_this.$data.name,b);
 				_this.$data.pageend =(new Date()).getTime();
 				let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
-				console.log(loadingtime);
+				
 				setTimeout((function(){loading.close()}),loadingtime);
 		    },
 		    error:function(){
@@ -312,12 +313,19 @@ export default {
 		});
   	 }else {
   		let loading = Vue.prototype.$loading({text:"玩命加载中...",background:"#80bd01",spinner:'el-icon-loading'});
-  	 	this.diseases =JSON.parse(storage.getItem(this.name));//必须格式转换
-  	 	this.totallist = this.diseases.length;
+  	 		//loading动画延时，先将整个列表框藏起来，
+  	 		$(".sec4").hide();
+  	 		_this.$data.diseases =JSON.parse(storage.getItem(_this.$data.name));//必须格式转换
+			
+  	 		_this.$data.totallist = _this.$data.diseases.length;
   	 	_this.$data.pageend =(new Date()).getTime();
 		let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
-		console.log(loadingtime);
-		setTimeout((function(){loading.close()}),loadingtime);
+		
+		setTimeout((function(){loading.close();
+		
+  	 		$(".sec4").show();
+  	 		
+		}),loadingtime);
   	 }
   	 if(this.totallist>40){
   	 	this.bigPage=true;

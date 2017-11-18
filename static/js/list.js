@@ -49,7 +49,7 @@ $(document).ready(function(){
     $(".activity>ul").eq($(this).index()).css("display","block").siblings("ul").css("display","none");
   })
 	/*提交表单验证*/
-	$(".jmtj").click(function(){
+	function tj(){
 		var re= /select|update|delete|exec|count|'|"|=|;|>|<|%/i;
 		var name =$.trim($("input[name='name']").val()),
 			call =$.trim($("input[name='call']").val()),
@@ -60,7 +60,7 @@ $(document).ready(function(){
 				return false;
 			}else {
 				if(name.length ==0){
-					alert("请输入姓名！");
+					 this.$message('这是一条消息提示');
 					return false;
 				}else if(name.length>10||!name.match(/^[\u4e00-\u9fa5]+$/)){
 					alert("请输入正确姓名！");
@@ -85,7 +85,7 @@ $(document).ready(function(){
 				
 			}
 		}
-	})
+	}
 	
 
 	

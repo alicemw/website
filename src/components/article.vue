@@ -425,5 +425,13 @@
 </script>
 
 <style>
-	
+	/*loading样式*/
+.el-icon-loading:before {
+	font-size: 50px;
+}
+.el-loading-spinner .el-loading-text {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+}
 </style>

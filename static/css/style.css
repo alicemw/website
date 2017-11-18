@@ -52,12 +52,7 @@ nav .nav {
   font-size: 0.24rem;
   line-height: 0.3rem;
 }
-/*loading样式*/
-.el-loading-text {
-	color: white;
-	font-size: 28px;
-	font-weight: bold;
-}
+
 
 /*loading样式*/
 nav .nav:nth-child(4) {
@@ -66,6 +61,8 @@ nav .nav:nth-child(4) {
 .banner {
 	width: 100%;
 	max-width: 640px;
+	max-height: 251px;
+   overflow: hidden;
 }
 .banner img {
 	width: 100%;
@@ -1670,7 +1667,7 @@ td{
 .flex-direction-nav {
 	display: none;
 }
-#list_article .list-anli .flex-control-nav {
+.list-anli .flex-control-nav {
 	display: block;
 }
 .flex-control-nav {
