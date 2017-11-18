@@ -3,11 +3,11 @@
 		<div class="innercontainer">
 			<div class="qcd">
     	<div class="position">
-    		<p><router-link to="/">首页</router-link>> <router-link to="/list">{{name}}</router-link>></p>
+    		<p><router-link to="/">首页</router-link>> <router-link to="list">{{name}}</router-link>></p>
 		    	</div>
 		    	<section class="sec4">
 		    		
-		    		<div class="doctor" v-for="con in diseases">
+		    		<div class="doctor" v-for="(con,index) in diseases" v-if="index >= pagesize*(currentPage-1) && index < pagesize*currentPage ">
 		    			<img :src="con.litpic" alt="" style="width: 1.8rem;" />
 		    			<div class="docinfo">
 		    				<p><router-link :to="con.id"><b>{{con.title}}</b></router-link></p> 
@@ -16,9 +16,17 @@
 		    			</div>
 		    			<div class="clear"></div>
 		    		</div>
-		    		
 		    		<div class="page">
-		    			
+    				  <el-pagination
+    				  	:small="bigPage"
+					  	@size-change="handleSizeChange"
+					    @current-change="handleCurrentChange"
+					    :current-page="currentPage"
+					    :page-sizes="[100, 200, 300, 400]"
+					    :page-size="pagesize"
+					    layout="prev, pager, next,total"
+					    :total="totallist">
+					  </el-pagination>
 		    		</div>
 		    	</section>
 		    </div>
@@ -238,22 +246,27 @@
 </template>
 
 <script>
-
+import Vue from 'vue'
 
 export default {
   name: 'list',
   data () {
     return {
-      msg: '列表页',
+      bigPage:false,
       name:'列表页',
       nameid:'',
-      diseases:''
+      diseases:'',
+      totallist:20,
+      currentPage:1,
+      pagesize:6,
+      pagestart:null,
+      pageend:null
     }
   },
   mounted (){
-  	
+  	$('body,html').animate({ scrollTop: 0 }, 0);
   	let path = this.$route.path;
-  	
+  		
   	let _this =this;
   	 	$.each(diseaseList, function(index,value) {
   		if(value.typedir == path){
@@ -262,7 +275,12 @@ export default {
   		}
   	 });
   	 var nid = this.nameid;
-  	 if (!storage.getItem(this.name)||storage.getItem(this.name)==0) {
+  	 _this.$data.pagestart = (new Date()).getTime();
+  	 if (!storage.getItem(this.name)) {
+  	 	
+  	 
+  	 	let loading = Vue.prototype.$loading({text:"玩命加载中...",background:"#80bd01",spinner:'el-icon-loading'});
+  	 	
 	  	 	$.ajax({
 			type : "POST",
 		    url : "http://m.0832pifu.com/test/test1.php",
@@ -271,9 +289,6 @@ export default {
 		    jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
 		    jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
 		    success : function(res){
-				/*$.each(res, function(idx,obj) {
-					obj.typedir =obj.typedir.substring(9);
-				});*/
 				$.each(res, function(idx,obj) {
 					//拼接图片地址
 					obj.litpic ='http://m.0832pifu.com'+obj.litpic;
@@ -282,32 +297,67 @@ export default {
 					obj.id ='/foo/'+obj.id;
 				});
 				_this.$data.diseases =res;
-				
+				_this.$data.totallist =res.length;
 				var b = JSON.stringify(_this.$data.diseases);
-			
+				
 				storage.setItem(_this.$data.name,b);
+				_this.$data.pageend =(new Date()).getTime();
+				let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
+				console.log(loadingtime);
+				setTimeout((function(){loading.close()}),loadingtime);
 		    },
 		    error:function(){
 		        alert('fail');
 		    }
 		});
   	 }else {
-  	 
+  		let loading = Vue.prototype.$loading({text:"玩命加载中...",background:"#80bd01",spinner:'el-icon-loading'});
   	 	this.diseases =JSON.parse(storage.getItem(this.name));//必须格式转换
+  	 	this.totallist = this.diseases.length;
+  	 	_this.$data.pageend =(new Date()).getTime();
+		let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
+		console.log(loadingtime);
+		setTimeout((function(){loading.close()}),loadingtime);
   	 }
-  	 
+  	 if(this.totallist>40){
+  	 	this.bigPage=true;
+  	 }
  //banner lunbo
  	$(".list-anli .flexslider").flexslider({
     	animation : "slide"
     });
+    /*列表页选项卡*/
+	$(".tab>ul>li").each(function(i){
+		$(this).click(function(){
+			$(".tab ul li").css({'color':"white",'background':'#55b0ff',"fontWeight":'normal'});
+			$(this).css({'color':"#55b0ff",'background':'#e6f3ff',"fontWeight":'bold'})
+			$(".tab-item").css("display",'none');
+			$(".tab-item").eq(i).css("display",'block');
+		})
+	})
 
   },
-
-  methods:{
- 	
- }
+  methods: {
+    handleSizeChange: function (size) {
+        this.pagesize = size;
+         $('body,html').animate({ scrollTop: $("#list_article").scrollTop() }, 0);
+    },
+    handleCurrentChange: function(currentPage){
+        this.currentPage = currentPage;
+         $('body,html').animate({ scrollTop: $("#list_article").scrollTop() }, 0);
+    }
+}
 }	
 </script>
 
 <style>
+	/*loading样式*/
+.el-icon-loading:before {
+	font-size: 50px;
+}
+.el-loading-spinner .el-loading-text {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+}
 </style>

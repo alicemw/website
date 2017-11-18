@@ -52,6 +52,14 @@ nav .nav {
   font-size: 0.24rem;
   line-height: 0.3rem;
 }
+/*loading样式*/
+.el-loading-text {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+/*loading样式*/
 nav .nav:nth-child(4) {
 	border-right: none;
 }
@@ -76,7 +84,7 @@ nav .nav:nth-child(4) {
 	margin: 0 auto;
 	border-bottom: 1px solid #ccc;
 }
-.position>p,.position>p>a {
+.position>p,.position>p a {
 	font-size: 0.28rem;
 	color: #656565;
 	font-weight: bold;

@@ -262,7 +262,7 @@
 </template>
 
 <script>
-	
+	import Vue from 'vue'
 	export default {
 		name:'article',
 		data(){
@@ -272,7 +272,9 @@
 				artid:'',
 				topdir:'',
 				title:'',
-				likart:''
+				likart:'',
+				pagestart:null,
+      			pageend:null
 			}
 		}, 
 		created () {
@@ -289,6 +291,10 @@
 			   
 			   let _this =this;
 			   let nid =this.artid;
+			   //页面开始时间
+			   _this.$data.pagestart = (new Date()).getTime();
+			   //loading动画
+  			 	let loading = Vue.prototype.$loading({text:"玩命加载中...",background:"#80bd01",spinner:'el-icon-loading'});
 			   
 			    //数据请求
 			    $.ajax({
@@ -330,11 +336,19 @@
 						  }
 						
 						_this.$data.likart =b;
+						
+						_this.$data.pageend =(new Date()).getTime();
+						let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
+						
+						setTimeout((function(){loading.close()}),loadingtime);
+					
 				    },
 				    error:function(){
 				        alert('fail');
 				    }
 				});
+				
+				 $('body,html').animate({ scrollTop: 0 }, 0);
 		     
 		   }
 		 },
@@ -349,7 +363,11 @@
 		   
 		   let _this =this;
 		   let nid =this.artid;
-		   
+	      //页面开始时间
+		   _this.$data.pagestart = (new Date()).getTime();
+		   //loading动画
+		 	let loading = Vue.prototype.$loading({text:"玩命加载中...",background:"#80bd01",spinner:'el-icon-loading'});
+		  
 		    //数据请求
 		    $.ajax({
 				type : "POST",
@@ -389,13 +407,19 @@
 					 
 					_this.$data.likart =b;
 					
+						_this.$data.pageend =(new Date()).getTime();
+						let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
+						
+						setTimeout((function(){loading.close()}),loadingtime);
+					
+					
 					
 			    },
 			    error:function(){
 			        alert('fail');
 			    }
 			});
-			
+			 $('body,html').animate({ scrollTop: 0 }, 0);
 		}
 	}
 </script>

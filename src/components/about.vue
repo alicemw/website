@@ -30,20 +30,11 @@
 		                <div class="disease_picture"><img src="../assets/images//diease.png"/><p>常见疾病</p></div>
 		                <ul>
 		                   <li>
-		                   		<a href="#">皮肤过敏</a>
-		                   		<a href="#">体癣</a>
-		                   		<a href="#">疥疮</a>
+		                   		<template v-for="(item,index) in data" v-if="index >=12 &&index<21 ">
+		                   			<router-link :to="item.typedir" >{{item.typename}}</router-link>
+		                   		</template>
 		                   </li>
-		                   <li>	
-		                   		<a href="#">皮肤瘙痒</a>
-		                   		<a href="#">手足癣</a>
-				                <a href="#">寻常疣</a>
-		                   </li>
-		                   <li>
-			                   	<a href="#">白癜风</a>
-			                   	<a href="#">腋臭</a>
-			                   	<a href="#">皮炎</a>
-		                   </li>
+		                   
 		                   <div class="clear"></div>
 		                </ul>
 		               <div class="clear"></div>
@@ -55,18 +46,11 @@
 		                <div class="beauty_picture"><img src="../assets/images//meirong.png"/><p>皮肤美容</p></div>
 		                <ul>
 		                   <li>
-		                   		<a href="#">疤痕</a>
-		                   		<a href="#">红血丝</a>
+		                   		<template v-for="(item,index) in data" v-if="index >=21 &&index<27 ">
+		                   			<router-link :to="item.typedir" >{{item.typename}}</router-link>
+		                   		</template>
 		                   </li>
-		                   <li>
-		                   		<a href="#">洗纹身</a>
-		                   		<a href="#">酒槽鼻</a>
-		                   </li>
-		                   	
-		                   <li>
-		                   		<a href="#">痘印</a>
-		                   		<a href="#">色素痣</a>  
-		                   </li>
+		                  
 		                   <div class="clear"></div>
 		                </ul>
 		               <div class="clear"></div>

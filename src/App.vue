@@ -31,6 +31,7 @@
 
 <script>
 import "../static/css/herun.css"
+
 export default {
   name: 'app'
 }
