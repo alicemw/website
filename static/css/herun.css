@@ -84,7 +84,7 @@ a{ text-decoration:none;font-family:"微软雅黑";}
 .title2{ width:6rem; margin:0.2rem auto; border-bottom:1px solid #dddddd;}
 .title2 img{ display:block; width:100%; margin:0.18rem auto;}
 .banner_2{ width:6rem; margin:0 auto;}
-.banner_2 img{ width:100%;}
+.banner_2 img{ width:100%;display: block;}
 .message{ margin:0 auto; width:6rem; margin-top:0.2rem; margin-bottom:0.18rem;}
 .message img{ float:left; display:block; margin-top:0.06rem; width:0.2rem;}
 .message p{color:#262626; font-size:0.2rem; float:left;}

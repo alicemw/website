@@ -305,7 +305,9 @@ export default {
 				_this.$data.pageend =(new Date()).getTime();
 				let loadingtime = (_this.$data.pageend -_this.$data.pagestart)>1000 ? 0:500;
 				
-				setTimeout((function(){loading.close()}),loadingtime);
+				setTimeout((function(){loading.close()
+						$(".sec4").show();
+				}),loadingtime);
 		    },
 		    error:function(){
 		        alert('fail');
