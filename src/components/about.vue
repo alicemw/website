@@ -1,5 +1,7 @@
 <template>
+	
 	<div class="container">
+		<header1></header1>
 		<div class="innercontainer">
 			<section class="passage_one">
 		        <div class="classification">
@@ -205,17 +207,22 @@
 		           <!--<el-progress type="circle" :percentage="percentage" :status="success" ></el-progress>-->
 		        
 		        </div>
-		        <div class="nav_8"></div> 
+		        
 		     </section>
 		</div>
+		<foot></foot>
 	</div>
 </template>
 
 <script>
-
+import header1 from './header1.vue'
+import foot from './foot.vue'
 
 export default {
-
+  components:{
+  	header1,
+  	foot
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
